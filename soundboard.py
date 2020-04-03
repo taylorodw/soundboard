@@ -1,5 +1,6 @@
 from tkinter import *
 from tkinter import filedialog
+from tkinter import Menu
 from playsound import playsound
 
 # this first section makes our window and title
@@ -13,17 +14,102 @@ lbl = Label(window, text="Soundboard", font=("Arial Bold", 18))
 
 lbl.grid(columnspan=3, sticky=N, padx=5, pady=5)
 
+from tkinter import *
+from tkinter import filedialog
+from tkinter import Menu
+
+# making the functions for initializing, loading, and saving soundboards
+
+def newboard():
+    global onesound
+    global twosound
+    global threesound
+    global foursound
+    global fivesound
+    global sixsound
+    global sevensound
+    global eightsound
+    onesound = r"D:\Python\Soundboard\utility\silence.wav"
+    twosound = r"D:\Python\Soundboard\utility\silence.wav"
+    threesound = r"D:\Python\Soundboard\utility\silence.wav"
+    foursound = r"D:\Python\Soundboard\utility\silence.wav"
+    fivesound = r"D:\Python\Soundboard\utility\silence.wav"
+    sixsound = r"D:\Python\Soundboard\utility\silence.wav"
+    sevensound = r"D:\Python\Soundboard\utility\silence.wav"
+    eightsound = r"D:\Python\Soundboard\utility\silence.wav"
+
+def loadboard():
+    global onesound
+    global twosound
+    global threesound
+    global foursound
+    global fivesound
+    global sixsound
+    global sevensound
+    global eightsound
+    loadname = filedialog.askopenfilename()
+    boardfile = open(loadname, "r")
+    onepath = boardfile.readline()
+    onesound = onepath.rstrip()
+    twopath = boardfile.readline()
+    twosound = twopath.rstrip()
+    threepath = boardfile.readline()
+    threesound = threepath.rstrip()
+    fourpath = boardfile.readline()
+    foursound = fourpath.rstrip()
+    fivepath = boardfile.readline()
+    fivesound = fivepath.rstrip()
+    sixpath = boardfile.readline()
+    sixsound = sixpath.rstrip()
+    sevenpath = boardfile.readline()
+    sevensound = sevenpath.rstrip()
+    eightpath = boardfile.readline()
+    eightsound = eightpath.rstrip()
+    boardfile.close()
+
+
+
+def saveboard():
+    global onesound
+    global twosound
+    global threesound
+    global foursound
+    global fivesound
+    global sixsound
+    global sevensound
+    global eightsound
+    savename = filedialog.asksaveasfilename()
+    savefile = open(savename, "w")
+    soundlist = [onesound, twosound, threesound, foursound, fivesound, sixsound, sevensound, eightsound]
+    savefile.write('\n'.join(soundlist))
+    savefile.close()
+
+
+# making the menu, with save and load features
+menu = Menu(window)
+
+new_item = Menu(menu, tearoff=0)
+
+new_item.add_command(label='New soundboard', command=newboard)
+new_item.add_command(label='Load soundboard', command=loadboard)
+new_item.add_command(label='Save soundboard', command=saveboard)
+
+menu.add_cascade(label='Menu', menu=new_item)
+
+window.config(menu=menu)
 
 # playsound doesn't work unless a .wav is loaded, so i load a short silent .wav file
 # users will need to change the filepath for now, eventually this should be all onboard
-onesound = "D:\Python\silence.wav"
-twosound = "D:\Python\silence.wav"
-threesound = "D:\Python\silence.wav"
-foursound = "D:\Python\silence.wav"
-fivesound = "D:\Python\silence.wav"
-sixsound = "D:\Python\silence.wav"
-sevensound = "D:\Python\silence.wav"
-eightsound = "D:\Python\silence.wav"
+onesound = r"D:\Python\Soundboard\utility\silence.wav"
+twosound = r"D:\Python\Soundboard\utility\silence.wav"
+threesound = r"D:\Python\Soundboard\utility\silence.wav"
+foursound = r"D:\Python\Soundboard\utility\silence.wav"
+fivesound = r"D:\Python\Soundboard\utility\silence.wav"
+sixsound = r"D:\Python\Soundboard\utility\silence.wav"
+sevensound = r"D:\Python\Soundboard\utility\silence.wav"
+eightsound = r"D:\Python\Soundboard\utility\silence.wav"
+
+
 
 # these are the functions for each button. they trigger when clicked
 def oneloadclicked():
